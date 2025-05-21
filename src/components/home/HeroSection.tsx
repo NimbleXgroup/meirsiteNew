@@ -25,6 +25,11 @@ const HeroSection = () => {
                 View Our Projects
               </Button>
             </Link>
+            <Link to="/admin" className="ml-auto">
+              <Button variant="ghost" className="text-white text-sm hover:bg-white/10">
+                Admin Panel
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
