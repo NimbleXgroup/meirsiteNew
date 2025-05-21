@@ -14,7 +14,7 @@ import {
   SidebarMenuButton,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Building2, Home, ListChecked, Users } from "lucide-react";
+import { Building2, Home, ListCheck, Users } from "lucide-react";
 
 // For this demo, we'll use a simple password check for admin access
 // In a real app, you would implement proper authentication with Supabase
@@ -116,7 +116,7 @@ const AdminLayout = () => {
                   <SidebarMenuItem>
                     <SidebarMenuButton asChild tooltip="Services">
                       <a href="/admin/services">
-                        <ListChecked />
+                        <ListCheck />
                         <span>Services</span>
                       </a>
                     </SidebarMenuButton>

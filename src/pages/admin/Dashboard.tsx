@@ -1,5 +1,5 @@
 
-import { Building2, ListChecked, Users } from "lucide-react";
+import { Building2, ListCheck, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
           <Card className="cursor-pointer transition-all hover:shadow-md">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-xl font-bold">Services</CardTitle>
-              <ListChecked className="h-5 w-5 text-construction-gold" />
+              <ListCheck className="h-5 w-5 text-construction-gold" />
             </CardHeader>
             <CardContent>
               <CardDescription>
