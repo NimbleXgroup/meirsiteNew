@@ -43,28 +43,34 @@ export type Database = {
       }
       projects: {
         Row: {
+          category: string | null
           client: string | null
           created_at: string | null
           description: string | null
           id: string
+          image: string | null
           location: string | null
           title: string
           year: number | null
         }
         Insert: {
+          category?: string | null
           client?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
+          image?: string | null
           location?: string | null
           title: string
           year?: number | null
         }
         Update: {
+          category?: string | null
           client?: string | null
           created_at?: string | null
           description?: string | null
           id?: string
+          image?: string | null
           location?: string | null
           title?: string
           year?: number | null
@@ -132,6 +138,30 @@ export type Database = {
           },
         ]
       }
+      services: {
+        Row: {
+          description: string | null
+          features: string[] | null
+          id: string
+          image: string | null
+          title: string
+        }
+        Insert: {
+          description?: string | null
+          features?: string[] | null
+          id: string
+          image?: string | null
+          title: string
+        }
+        Update: {
+          description?: string | null
+          features?: string[] | null
+          id?: string
+          image?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
@@ -161,10 +191,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
-      user_role_type: "manager" | "foreman" | "worker"
+      user_role_type: "manager" | "foreman" | "worker" | "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -280,7 +313,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      user_role_type: ["manager", "foreman", "worker"],
+      user_role_type: ["manager", "foreman", "worker", "admin"],
     },
   },
 } as const

@@ -28,8 +28,6 @@ const ProjectsPreview = () => {
     }
   });
 
-  const projectsToDisplay = projects || [];
-
   return (
     <section className="section-padding bg-white" dir="rtl">
       <div className="container mx-auto">
@@ -64,7 +62,7 @@ const ProjectsPreview = () => {
            </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projectsToDisplay.map((project) => (
+            {projects?.map((project) => (
               <Card key={project.id} className="overflow-hidden border-none shadow-lg">
                 <div className="h-60 overflow-hidden">
                   <img 

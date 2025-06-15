@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,43 +23,24 @@ import {
 import { Pen, Trash2, Plus } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { Skeleton } from "@/components/ui/skeleton";
 
-// Mock data - would come from API/database in a real app
-const initialServices = [
-  {
-    id: "residential",
-    title: "בנייה למגורים",
-    description: "בניית בתים באיכות גבוהה שמגשימים לכם חלום, עם גימור קפדני ותשומת לב לכל פרט.",
-    image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
-    features: [
-      "תכנון ובניית בתים בהתאמה אישית",
-      "הרחבות ושיפוצים",
-      "בנייה יוקרתית",
-      "פיתוח בנייני דירות",
-      "טכניקות בנייה ירוקות",
-      "פתרונות מגורים חסכוניים באנרגיה"
-    ]
-  },
-  {
-    id: "commercial",
-    title: "בניינים מסחריים",
-    description: "יצירת מרחבים מסחריים מעוצבים ופונקציונליים שמקדמים את העסק שלך.",
-    image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
-    features: [
-      "בנייה למשרדים וחנויות",
-      "פיתוח שטחי מסחר",
-      "הקמת מפעלים",
-      "מסעדות ומבני אירוח",
-      "מרפאות",
-      "מבני חינוך"
-    ]
-  },
-];
+type Service = {
+  id: string;
+  title: string;
+  description: string | null;
+  image: string | null;
+  features: string[] | null;
+};
 
-type Service = typeof initialServices[0];
+type ServiceFormData = Omit<Service, 'id'>;
 
 const AdminServices = () => {
-  const [services, setServices] = useState(initialServices);
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [newService, setNewService] = useState<Partial<Service>>({
     id: "",
@@ -70,82 +52,106 @@ const AdminServices = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { toast } = useToast();
+  
+  const { data: services, isLoading, error } = useQuery<Service[]>({
+    queryKey: ['services'],
+    queryFn: async () => {
+      const { data, error } = await supabase.from('services').select('*').order('title');
+      if (error) throw new Error(error.message);
+      return data || [];
+    }
+  });
 
-  // Function to update a single feature in the features array
+  const addMutation = useMutation({
+    mutationFn: async (serviceToAdd: Omit<Service, 'id'> & { id: string }) => {
+      const { data, error } = await supabase.from('services').insert(serviceToAdd).select().single();
+      if (error) throw new Error(error.message);
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['services'] });
+      toast({ title: "שירות נוסף", description: `"${data.title}" נוסף בהצלחה.` });
+      setIsAddDialogOpen(false);
+      setNewService({ id: "", title: "", description: "", image: "", features: ["", "", "", "", "", ""] });
+    },
+    onError: (error) => {
+      toast({ title: "שגיאה בהוספת שירות", description: error.message, variant: "destructive" });
+    }
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: async (serviceToUpdate: Service) => {
+      const { data, error } = await supabase.from('services').update(serviceToUpdate).eq('id', serviceToUpdate.id).select().single();
+      if (error) throw new Error(error.message);
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['services'] });
+      toast({ title: "שירות עודכן", description: `"${data.title}" עודכן בהצלחה.` });
+      setIsEditDialogOpen(false);
+      setEditingService(null);
+    },
+    onError: (error) => {
+      toast({ title: "שגיאה בעדכון שירות", description: error.message, variant: "destructive" });
+    }
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (serviceId: string) => {
+      const { error } = await supabase.from('services').delete().eq('id', serviceId);
+      if (error) throw new Error(error.message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['services'] });
+      toast({ title: "שירות נמחק", description: "השירות נמחק בהצלחה." });
+      setIsDeleteDialogOpen(false);
+      setEditingService(null);
+    },
+    onError: (error) => {
+      toast({ title: "שגיאה במחיקת שירות", description: error.message, variant: "destructive" });
+    }
+  });
+  
   const updateFeature = (index: number, value: string, isNewService: boolean = false) => {
     if (isNewService) {
       const updatedFeatures = [...(newService.features || [])];
       updatedFeatures[index] = value;
       setNewService({ ...newService, features: updatedFeatures });
     } else if (editingService) {
-      const updatedFeatures = [...editingService.features];
+      const updatedFeatures = [...(editingService.features || [])];
       updatedFeatures[index] = value;
-      setEditingService({ ...editingService, features: updatedFeatures });
+      setEditingService({ ...editingService, features: updatedFeatures as string[] });
     }
   };
 
-  // Function to handle adding a new service
   const handleAddService = () => {
-    // Filter out empty features
     const cleanedFeatures = (newService.features || []).filter(feature => feature.trim() !== "");
+    const serviceId = newService.id || newService.title?.toLowerCase().replace(/\s+/g, '-') || `service-${Date.now()}`;
     
     const serviceToAdd = { 
       ...newService, 
-      id: newService.id || newService.title?.toLowerCase().replace(/\s+/g, '-') || `service-${Date.now()}`,
+      id: serviceId,
       features: cleanedFeatures
-    } as Service;
+    } as Omit<Service, 'id'> & { id: string };
+
+    if (!serviceToAdd.title || !serviceToAdd.id) {
+      toast({ title: "שגיאה", description: "כותרת ומזהה הם שדות חובה.", variant: "destructive" });
+      return;
+    }
     
-    setServices([...services, serviceToAdd]);
-    setIsAddDialogOpen(false);
-    toast({
-      title: "Service added",
-      description: `${serviceToAdd.title} has been added successfully.`
-    });
-    
-    // Reset form
-    setNewService({
-      id: "",
-      title: "",
-      description: "",
-      image: "",
-      features: ["", "", "", "", "", ""]
-    });
+    addMutation.mutate(serviceToAdd);
   };
 
-  // Function to handle updating a service
   const handleUpdateService = () => {
     if (!editingService) return;
-    
-    // Filter out empty features
-    const cleanedFeatures = editingService.features.filter(feature => feature.trim() !== "");
+    const cleanedFeatures = (editingService.features || []).filter(feature => feature && feature.trim() !== "");
     const updatedService = { ...editingService, features: cleanedFeatures };
-    
-    const updatedServices = services.map(s => 
-      s.id === updatedService.id ? updatedService : s
-    );
-    
-    setServices(updatedServices);
-    setIsEditDialogOpen(false);
-    toast({
-      title: "Service updated",
-      description: `${updatedService.title} has been updated successfully.`
-    });
-    setEditingService(null);
+    updateMutation.mutate(updatedService);
   };
 
-  // Function to handle deleting a service
   const handleDeleteService = () => {
-    if (!editingService) return;
-    
-    const updatedServices = services.filter(s => s.id !== editingService.id);
-    setServices(updatedServices);
-    setIsDeleteDialogOpen(false);
-    toast({
-      title: "Service deleted",
-      description: `${editingService.title} has been deleted successfully.`
-    });
-    setEditingService(null);
+    if (!editingService?.id) return;
+    deleteMutation.mutate(editingService.id);
   };
 
   return (
@@ -155,7 +161,7 @@ const AdminServices = () => {
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-construction-navy">
-              <Plus className="w-4 h-4 mr-2" /> הוסף שירות
+              <Plus className="w-4 h-4 ml-2" /> הוסף שירות
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
@@ -177,7 +183,7 @@ const AdminServices = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="id" className="text-sm font-medium">מזהה (אופציונלי)</label>
+                  <label htmlFor="id" className="text-sm font-medium">מזהה (באנגלית)</label>
                   <Input 
                     id="id" 
                     value={newService.id}
@@ -229,9 +235,9 @@ const AdminServices = () => {
               <Button 
                 className="bg-construction-navy"
                 onClick={handleAddService}
-                disabled={!newService.title || !newService.description}
+                disabled={!newService.title || !newService.id || addMutation.isPending}
               >
-                הוסף שירות
+                {addMutation.isPending ? 'מוסיף...' : 'הוסף שירות'}
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -240,43 +246,51 @@ const AdminServices = () => {
 
       {/* Services grid preview */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {services.map((service) => (
-          <Card key={service.id} className="overflow-hidden">
-            <div className="h-40 overflow-hidden">
-              <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
-            </div>
-            <CardContent className="p-4">
-              <h3 className="text-xl font-bold mb-2">{service.title}</h3>
-              <p className="text-gray-600 text-sm mb-4">{service.description}</p>
-              
-              <div className="flex justify-end gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    setEditingService(service);
-                    setIsEditDialogOpen(true);
-                  }}
-                >
-                  <Pen className="h-4 w-4 mr-2" /> ערוך
-                </Button>
-                <Button
-                  size="sm"
-                  variant="outline"
-                  className="text-red-500 hover:text-red-600"
-                  onClick={() => {
-                    setEditingService(service);
-                    setIsDeleteDialogOpen(true);
-                  }}
-                >
-                  <Trash2 className="h-4 w-4 mr-2" /> מחק
-                </Button>
+        {isLoading ? (
+          [...Array(2)].map((_, i) => (
+            <Card key={i}><CardContent className="p-4"><Skeleton className="h-64 w-full" /></CardContent></Card>
+          ))
+        ) : error ? (
+           <div className="col-span-2 text-center py-10 bg-red-50 rounded-lg text-red-500">
+            <p>שגיאה בטעינת שירותים: {error.message}</p>
+          </div>
+        ) : services && services.length > 0 ? (
+          services.map((service) => (
+            <Card key={service.id} className="overflow-hidden">
+              <div className="h-40 overflow-hidden">
+                <img src={service.image || '/placeholder.svg'} alt={service.title} className="w-full h-full object-cover" />
               </div>
-            </CardContent>
-          </Card>
-        ))}
-        
-        {services.length === 0 && (
+              <CardContent className="p-4">
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <p className="text-gray-600 text-sm mb-4 h-10 overflow-hidden">{service.description}</p>
+                
+                <div className="flex justify-end gap-2">
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => {
+                      setEditingService({ ...service, features: [...(service.features || []), ...Array(6 - (service.features?.length || 0)).fill('')] });
+                      setIsEditDialogOpen(true);
+                    }}
+                  >
+                    <Pen className="h-4 w-4 ml-2" /> ערוך
+                  </Button>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-red-500 hover:text-red-600"
+                    onClick={() => {
+                      setEditingService(service);
+                      setIsDeleteDialogOpen(true);
+                    }}
+                  >
+                    <Trash2 className="h-4 w-4 ml-2" /> מחק
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
           <div className="col-span-2 text-center py-10 bg-gray-50 rounded-lg">
             <p className="text-gray-500">לא נמצאו שירותים. הוסף שירות חדש כדי להתחיל.</p>
           </div>
@@ -308,7 +322,7 @@ const AdminServices = () => {
                   <Input 
                     id="edit-id" 
                     value={editingService.id}
-                    disabled  // IDs shouldn't be editable after creation to avoid breaking links
+                    disabled
                   />
                 </div>
               </div>
@@ -317,7 +331,7 @@ const AdminServices = () => {
                 <label htmlFor="edit-image" className="text-sm font-medium">כתובת URL לתמונה</label>
                 <Input 
                   id="edit-image" 
-                  value={editingService.image}
+                  value={editingService.image || ''}
                   onChange={(e) => setEditingService({...editingService, image: e.target.value})}
                 />
               </div>
@@ -326,16 +340,16 @@ const AdminServices = () => {
                 <label htmlFor="edit-description" className="text-sm font-medium">תיאור</label>
                 <Textarea 
                   id="edit-description" 
-                  value={editingService.description}
+                  value={editingService.description || ''}
                   onChange={(e) => setEditingService({...editingService, description: e.target.value})}
                   rows={3}
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">מאפיינים</label>
+                <label className="text-sm font-medium">מאפיינים (עד 6)</label>
                 <div className="grid grid-cols-1 gap-2">
-                  {editingService.features.map((feature, index) => (
+                  {(editingService.features || []).map((feature, index) => (
                     <Input
                       key={index}
                       value={feature}
@@ -348,14 +362,15 @@ const AdminServices = () => {
             </div>
           )}
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+            <Button variant="outline" onClick={() => { setIsEditDialogOpen(false); setEditingService(null); }}>
               ביטול
             </Button>
             <Button 
               className="bg-construction-navy"
               onClick={handleUpdateService}
+              disabled={updateMutation.isPending}
             >
-              שמור שינויים
+              {updateMutation.isPending ? 'שומר...' : 'שמור שינויים'}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -371,14 +386,15 @@ const AdminServices = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+            <Button variant="outline" onClick={() => { setIsDeleteDialogOpen(false); setEditingService(null); }}>
               ביטול
             </Button>
             <Button 
               variant="destructive"
               onClick={handleDeleteService}
+              disabled={deleteMutation.isPending}
             >
-              מחק
+              {deleteMutation.isPending ? 'מוחק...' : 'מחק'}
             </Button>
           </DialogFooter>
         </DialogContent>
