@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,63 +10,63 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Modern Office Building",
-      category: "Commercial",
+      title: "בניין משרדים מודרני",
+      category: "מסחרי",
       image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
-      description: "A 10-story modern office building with sustainable design elements and state-of-the-art facilities.",
-      location: "Downtown Business District",
+      description: "בניין משרדים גבוה בעיצוב חדיש עם דגש על קיימות וטכנולוגיה מתקדמת.",
+      location: "מרכז העסקים הראשי",
       year: 2023,
-      client: "Tech Innovations Inc."
+      client: "טק אינוביישנס"
     },
     {
       id: 2,
-      title: "Luxury Residential Complex",
-      category: "Residential",
+      title: "קומפלקס מגורים יוקרתי",
+      category: "מגורים",
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
-      description: "Premium residential complex featuring 45 luxury apartments with high-end finishes and amenities.",
-      location: "Riverside Heights",
+      description: "מתחם דירות יוקרתי הכולל 45 דירות מעוצבות וסטנדרט בניה גבוה במיוחד.",
+      location: "ריברסייד",
       year: 2022,
-      client: "Riverside Developments LLC"
+      client: "ריברסייד נדל\"ן"
     },
     {
       id: 3,
-      title: "Public Library Renovation",
-      category: "Renovation",
+      title: "שיפוץ ספריה ציבורית",
+      category: "שיפוץ",
       image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
-      description: "Complete renovation and modernization of the city's main public library while preserving its historic elements.",
-      location: "City Center",
+      description: "שדרוג הספריה העירונית תוך שמירה על אלמנטים היסטוריים.",
+      location: "מרכז העיר",
       year: 2023,
-      client: "City of Springfield"
+      client: "עיריית ספרינגפילד"
     },
     {
       id: 4,
-      title: "Hillside Custom Home",
-      category: "Residential",
+      title: "בית פרטי בהר",
+      category: "מגורים",
       image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
-      description: "Custom-designed luxury home built on challenging hillside terrain with panoramic views.",
-      location: "Mountain View Estates",
+      description: "בית יוקרה ייחודי שנבנה בטופוגרפיה מאתגרת עם נוף מהמם.",
+      location: "נופי ההר",
       year: 2021,
-      client: "Private Client"
+      client: "לקוח פרטי"
     },
     {
       id: 5,
-      title: "Healthcare Clinic",
-      category: "Commercial",
+      title: "מרפאת בריאות",
+      category: "מסחרי",
       image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
-      description: "Modern medical clinic designed for optimal patient care with specialized treatment rooms and advanced technology.",
-      location: "Westside Medical District",
+      description: "מרפאה מודרנית לאבחון וטיפול עם חדרי טיפול חדשניים.",
+      location: "רובע הבריאות",
       year: 2022,
-      client: "Valley Health Partners"
+      client: "ואליי הלת'"
     },
     {
       id: 6,
-      title: "Historic Building Restoration",
-      category: "Renovation",
+      title: "שימור בניין היסטורי",
+      category: "שיפוץ",
       image: "https://images.unsplash.com/photo-1487958449943-2429e8be8625",
-      description: "Careful restoration of a 120-year-old landmark building, preserving historical features while updating infrastructure.",
-      location: "Old Town District",
+      description: "שימור ופיתוח מבנה היסטורי בן 120 שנה תוך עדכון התשתיות.",
+      location: "העיר העתיקה",
       year: 2023,
-      client: "Heritage Preservation Society"
+      client: "עמותת שימור"
     }
   ];
 
@@ -78,22 +77,21 @@ const Projects = () => {
   return (
     <>
       <Navbar />
-      
+
       {/* Header */}
-      <section className="pt-32 pb-16 bg-construction-navy text-white">
+      <section className="pt-32 pb-16 bg-construction-navy text-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Projects</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">הפרויקטים שלנו</h1>
             <p className="text-xl text-gray-200">
-              Explore our portfolio of completed projects showcasing our expertise,
-              craftsmanship, and commitment to excellence.
+              גלשו בפרויקטים שהשלמנו – מקצועיות, יצירתיות ומחויבות למצוינות.
             </p>
           </div>
         </div>
       </section>
       
       {/* Filters */}
-      <section className="py-8 bg-white border-b border-gray-200">
+      <section className="py-8 bg-white border-b border-gray-200" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap gap-4 justify-center">
             <Button 
@@ -101,35 +99,35 @@ const Projects = () => {
               className={filter === "all" ? "bg-construction-navy" : ""}
               onClick={() => setFilter("all")}
             >
-              All Projects
+              כל הפרויקטים
             </Button>
             <Button 
               variant={filter === "residential" ? "default" : "outline"}
               className={filter === "residential" ? "bg-construction-navy" : ""}
               onClick={() => setFilter("residential")}
             >
-              Residential
+              מגורים
             </Button>
             <Button 
               variant={filter === "commercial" ? "default" : "outline"}
               className={filter === "commercial" ? "bg-construction-navy" : ""}
               onClick={() => setFilter("commercial")}
             >
-              Commercial
+              מסחרי
             </Button>
             <Button 
               variant={filter === "renovation" ? "default" : "outline"}
               className={filter === "renovation" ? "bg-construction-navy" : ""}
               onClick={() => setFilter("renovation")}
             >
-              Renovation
+              שיפוץ
             </Button>
           </div>
         </div>
       </section>
       
       {/* Projects Grid */}
-      <section className="py-16 bg-construction-light">
+      <section className="py-16 bg-construction-light" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
@@ -153,22 +151,22 @@ const Projects = () => {
                   <p className="text-construction-gray mb-4">{project.description}</p>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <div>
-                      <span className="font-semibold">Location:</span>
+                      <span className="font-semibold">מיקום:</span>
                       <p className="text-construction-gray">{project.location}</p>
                     </div>
                     <div>
-                      <span className="font-semibold">Year:</span>
+                      <span className="font-semibold">שנה:</span>
                       <p className="text-construction-gray">{project.year}</p>
                     </div>
                     <div className="col-span-2">
-                      <span className="font-semibold">Client:</span>
+                      <span className="font-semibold">לקוח:</span>
                       <p className="text-construction-gray">{project.client}</p>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter>
                   <Button className="bg-construction-navy hover:bg-construction-navy/90 w-full">
-                    View Project Details
+                    לצפייה בפרויקט
                   </Button>
                 </CardFooter>
               </Card>
@@ -177,13 +175,12 @@ const Projects = () => {
           
           {filteredProjects.length === 0 && (
             <div className="text-center py-16">
-              <h3 className="text-2xl font-bold text-construction-navy mb-2">No projects found</h3>
-              <p className="text-construction-gray">Please try another category filter</p>
+              <h3 className="text-2xl font-bold text-construction-navy mb-2">לא נמצאו פרויקטים</h3>
+              <p className="text-construction-gray">נסו סינון קטגוריה אחר</p>
             </div>
           )}
         </div>
       </section>
-      
       <Footer />
     </>
   );

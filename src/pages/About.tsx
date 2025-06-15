@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Check } from "lucide-react";
@@ -7,38 +6,38 @@ const About = () => {
   const teamMembers = [
     {
       name: "John Robinson",
-      position: "Founder & CEO",
+      position: "מייסד ומנכ\"ל",
       image: "https://randomuser.me/api/portraits/men/75.jpg",
-      bio: "With over 25 years in construction, John founded ConstructPro with a vision to deliver exceptional quality and service."
+      bio: "עם ניסיון של יותר מ-25 שנה בבנייה, ג'ון ייסד את ConstructPro עם חזון להציע איכות ושירות יוצאי דופן."
     },
     {
       name: "Lisa Chen",
-      position: "Chief Architect",
+      position: "אדריכלית ראשית",
       image: "https://randomuser.me/api/portraits/women/68.jpg",
-      bio: "Lisa brings 15 years of architectural expertise, specializing in sustainable design and innovative structures."
+      bio: "ליסה מביאה 15 שנות ניסיון באדריכלות, מומחית לעיצוב בר-קיימא ומבנים חדשניים."
     },
     {
       name: "Robert Garcia",
-      position: "Operations Manager",
+      position: "מנהל תפעול",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
-      bio: "Robert ensures every project runs smoothly, coordinating our expert teams and maintaining our high standards."
+      bio: "רוברט מוודא שכל פרויקט מתנהל בצורה חלקה, בתיאום וצוותים מקצועיים בסטנדרט הגבוה ביותר."
     },
     {
       name: "Maria Thompson",
-      position: "Client Relations Director",
+      position: "מנהלת קשרי לקוחות",
       image: "https://randomuser.me/api/portraits/women/45.jpg",
-      bio: "Maria is dedicated to ensuring client satisfaction throughout the entire construction process."
+      bio: "מריה דואגת לשביעות רצון הלקוחות לכל אורך תהליך הבנייה."
     }
   ];
 
   const certifications = [
-    "Licensed General Contractor",
-    "LEED Certified Builder",
-    "OSHA Safety Certified",
-    "Energy Star Partner",
-    "Better Business Bureau A+ Rating",
-    "National Association of Home Builders Member",
-    "American Institute of Constructors"
+    "קבלן רשום",
+    "בונה בתקן LEED",
+    "הסמכת בטיחות OSHA",
+    "שותף Energy Star",
+    "דירוג A+ לשכת העסקים",
+    "חבר התאחדות בוני הארץ",
+    "חבר המכון האמריקאי לבנאים"
   ];
 
   return (
@@ -46,36 +45,31 @@ const About = () => {
       <Navbar />
       
       {/* Header */}
-      <section className="pt-32 pb-16 bg-construction-navy text-white">
+      <section className="pt-32 pb-16 bg-construction-navy text-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">About ConstructPro</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">על קונסטרקטפרו</h1>
             <p className="text-xl text-gray-200">
-              Building excellence through integrity, innovation, and exceptional craftsmanship since 2010.
+              בונים באמינות, חדשנות ומקצועיות משנת 2010.
             </p>
           </div>
         </div>
       </section>
       
       {/* Company History */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-6 text-construction-navy">Our Story</h2>
+              <h2 className="text-3xl font-bold mb-6 text-construction-navy">הסיפור שלנו</h2>
               <p className="text-construction-gray mb-4">
-                Founded in 2010 by John Robinson, ConstructPro began as a small residential construction 
-                company with a vision to deliver exceptional quality and service to homeowners.
+                קונסטרקטפרו נולדה בשנת 2010 על ידי ג'ון רובינסון, כחברת בניה קטנה בעלת חזון לאיכות ושירות ללקוחות פרטיים.
               </p>
               <p className="text-construction-gray mb-4">
-                Over the years, we've grown into a full-service construction firm handling both residential 
-                and commercial projects across the region. Our growth has been built on a foundation of 
-                satisfied clients, quality workmanship, and a reputation for integrity.
+                במהלך השנים צמחנו והפכנו לחברה מלאה המבצעת פרויקטים מגוונים למגורים ומסחר, הכל מבוסס על אמון לקוחות, עבודה איכותית ושקיפות.
               </p>
               <p className="text-construction-gray">
-                Today, ConstructPro employs over 50 professionals and has completed more than 500 projects, 
-                ranging from custom homes to large commercial developments. Throughout our growth, we've 
-                remained committed to our founding principles of quality, value, and customer satisfaction.
+                כיום החברה מעסיקה מעל 50 אנשי מקצוע ומעל 500 פרויקטים שהושלמו, מבתים פרטיים ועד מבני ענק, מבלי לוותר על ערכי איכות, ערך ושירות.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -106,62 +100,59 @@ const About = () => {
       </section>
       
       {/* Mission & Values */}
-      <section className="py-16 bg-construction-light">
+      <section className="py-16 bg-construction-light" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-construction-navy">Our Mission & Values</h2>
+            <h2 className="text-3xl font-bold mb-4 text-construction-navy">המשימה והערכים שלנו</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold mb-4 text-construction-navy">Our Mission</h3>
+              <h3 className="text-2xl font-bold mb-4 text-construction-navy">המשימה שלנו</h3>
               <p className="text-construction-gray mb-4">
-                To deliver exceptional construction services that exceed client expectations, 
-                while maintaining the highest standards of quality, safety, and integrity in 
-                everything we do.
+                לספק שירותי בנייה ברמה הגבוהה ביותר, עם שקיפות, דיוק, ואחריות ללקוח.
               </p>
               <p className="text-construction-gray">
-                We aim to build structures that stand the test of time and relationships with 
-                clients that last a lifetime.
+                אנחנו כאן לבנות מבנים עמידים, וקשרי אמון לטווח ארוך עם לקוחותינו.
               </p>
             </div>
             
             <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-2xl font-bold mb-4 text-construction-navy">Core Values</h3>
+              <h3 className="text-2xl font-bold mb-4 text-construction-navy">ערכי ליבה</h3>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <Check className="text-construction-gold mt-1" size={20} />
                   <div>
-                    <span className="font-semibold">Integrity</span>
-                    <p className="text-construction-gray text-sm">Honesty and transparency in all our dealings</p>
+                    <span className="font-semibold">יושרה</span>
+                    <p className="text-construction-gray text-sm">שקיפות ואמינות מול כל לקוח</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="text-construction-gold mt-1" size={20} />
                   <div>
-                    <span className="font-semibold">Quality</span>
-                    <p className="text-construction-gray text-sm">Unwavering commitment to exceptional craftsmanship</p>
+                    <span className="font-semibold">איכות</span>
+                    <p className="text-construction-gray text-sm">מחויבות לאיכות אומנותית חסרת פשרות</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="text-construction-gold mt-1" size={20} />
                   <div>
-                    <span className="font-semibold">Safety</span>
-                    <p className="text-construction-gray text-sm">Prioritizing wellbeing on every job site</p>
+                    <span className="font-semibold">בטיחות</span>
+                    <p className="text-construction-gray text-sm">הקפדה על בטיחות בכל אתר בניה</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="text-construction-gold mt-1" size={20} />
                   <div>
-                    <span className="font-semibold">Innovation</span>
-                    <p className="text-construction-gray text-sm">Embracing new techniques and technologies</p>
+                    <span className="font-semibold">חדשנות</span>
+                    <p className="text-construction-gray text-sm">שילוב טכנולוגיות ושיטות חדשות</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="text-construction-gold mt-1" size={20} />
                   <div>
-                    <span className="font-semibold">Client Focus</span>
-                    <p className="text-construction-gray text-sm">Delivering beyond expectations every time</p>
+                    <span className="font-semibold">מיקוד בלקוח</span>
+                    <p className="text-construction-gray text-sm">תמיד לתת ערך מעבר למצופה</p>
                   </div>
                 </li>
               </ul>
@@ -170,13 +161,13 @@ const About = () => {
         </div>
       </section>
       
-      {/* Team Members */}
-      <section className="py-16 bg-white">
+      {/* Team */}
+      <section className="py-16 bg-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-construction-navy">Our Leadership Team</h2>
+            <h2 className="text-3xl font-bold mb-4 text-construction-navy">הנהלת החברה</h2>
             <p className="text-construction-gray">
-              Meet the experienced professionals who lead our company with expertise and passion.
+              הכירו את צוות המומחים שמוביל אותנו.
             </p>
           </div>
           
@@ -200,12 +191,12 @@ const About = () => {
       </section>
       
       {/* Certifications */}
-      <section className="py-16 bg-construction-light">
+      <section className="py-16 bg-construction-light" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-construction-navy">Our Certifications</h2>
+            <h2 className="text-3xl font-bold mb-4 text-construction-navy">הסמכות ותעודות</h2>
             <p className="text-construction-gray">
-              We maintain the highest industry standards with these professional certifications and memberships.
+              אנו עומדים בסטנדרטים הגבוהים ביותר עם מגוון הסמכות מקצועיות.
             </p>
           </div>
           

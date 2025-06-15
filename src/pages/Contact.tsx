@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -70,46 +69,45 @@ const Contact = () => {
       <Navbar />
       
       {/* Header */}
-      <section className="pt-32 pb-16 bg-construction-navy text-white">
+      <section className="pt-32 pb-16 bg-construction-navy text-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">צור קשר</h1>
             <p className="text-xl text-gray-200">
-              Have questions or ready to start your project? 
-              Reach out to us for a free consultation and quote.
+              יש לך שאלות או רוצה להקים פרויקט? פנה אלינו לייעוץ והצעת מחיר ללא התחייבות.
             </p>
           </div>
         </div>
       </section>
       
       {/* Contact Form & Info */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white" dir="rtl">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div className="bg-construction-light p-8 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold mb-6 text-construction-navy">Request a Quote</h2>
+              <h2 className="text-2xl font-bold mb-6 text-construction-navy">בקשת הצעת מחיר</h2>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">שם מלא</Label>
                     <Input 
                       id="name"
                       name="name"
-                      placeholder="John Smith"
+                      placeholder="ישראל ישראלי"
                       value={formData.name}
                       onChange={handleInputChange}
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email">דוא״ל</Label>
                     <Input 
                       id="email"
                       name="email"
                       type="email"
-                      placeholder="john@example.com"
+                      placeholder="israel@example.com"
                       value={formData.email}
                       onChange={handleInputChange}
                       required
@@ -119,39 +117,39 @@ const Contact = () => {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">טלפון</Label>
                     <Input 
                       id="phone"
                       name="phone"
-                      placeholder="(555) 123-4567"
+                      placeholder="052-1234567"
                       value={formData.phone}
                       onChange={handleInputChange}
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="serviceType">Service Type</Label>
+                    <Label htmlFor="serviceType">סוג שירות</Label>
                     <Select value={formData.serviceType} onValueChange={handleSelectChange}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select service" />
+                        <SelectValue placeholder="בחר שירות" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="residential">Residential Construction</SelectItem>
-                        <SelectItem value="commercial">Commercial Building</SelectItem>
-                        <SelectItem value="renovation">Renovations & Remodeling</SelectItem>
-                        <SelectItem value="concrete">Concrete Work & Masonry</SelectItem>
-                        <SelectItem value="management">Project Management</SelectItem>
+                        <SelectItem value="residential">בנייה למגורים</SelectItem>
+                        <SelectItem value="commercial">בניינים מסחריים</SelectItem>
+                        <SelectItem value="renovation">שיפוצים וחידושים</SelectItem>
+                        <SelectItem value="concrete">עבודות בטון ואבן</SelectItem>
+                        <SelectItem value="management">ניהול פרויקטים</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Project Details</Label>
+                  <Label htmlFor="message">פרטי פרויקט</Label>
                   <Textarea 
                     id="message"
                     name="message"
-                    placeholder="Please provide details about your project..."
+                    placeholder="פרט כמה שיותר על הפרויקט..."
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={5}
@@ -160,7 +158,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="file">Upload Project Plans (optional)</Label>
+                  <Label htmlFor="file">העלה תוכניות (אופציונלי)</Label>
                   <Input 
                     id="file"
                     name="file"
@@ -168,7 +166,7 @@ const Contact = () => {
                     onChange={handleFileChange}
                     accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                   />
-                  <p className="text-sm text-gray-500">Accept PDF, DOC, or image files up to 10MB</p>
+                  <p className="text-sm text-gray-500">קבצי PDF, DOC, או תמונה עד 10MB</p>
                 </div>
                 
                 <Button 
@@ -176,14 +174,14 @@ const Contact = () => {
                   className="w-full bg-construction-navy hover:bg-construction-navy/90"
                   disabled={loading}
                 >
-                  {loading ? "Submitting..." : "Submit Quote Request"}
+                  {loading ? "שולח..." : "שלח בקשה להצעת מחיר"}
                 </Button>
               </form>
             </div>
             
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-construction-navy">Get In Touch</h2>
+              <h2 className="text-2xl font-bold mb-6 text-construction-navy">פרטי יצירת קשר</h2>
               
               <div className="space-y-6 mb-8">
                 <div className="flex items-start gap-4">
@@ -191,9 +189,9 @@ const Contact = () => {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Our Office</h3>
-                    <p className="text-construction-gray">123 Construction Ave</p>
-                    <p className="text-construction-gray">Building City, ST 12345</p>
+                    <h3 className="font-semibold text-lg">המשרד</h3>
+                    <p className="text-construction-gray">123 רחוב הבנייה</p>
+                    <p className="text-construction-gray">עיר הבנייה, 12345</p>
                   </div>
                 </div>
                 
@@ -202,9 +200,9 @@ const Contact = () => {
                     <Phone size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Phone</h3>
-                    <p className="text-construction-gray">(555) 123-4567</p>
-                    <p className="text-construction-gray">Mon-Fri: 8am - 6pm</p>
+                    <h3 className="font-semibold text-lg">טלפון</h3>
+                    <p className="text-construction-gray">052-1234567</p>
+                    <p className="text-construction-gray">ימים א'-ה': 8:00-18:00</p>
                   </div>
                 </div>
                 
@@ -213,7 +211,7 @@ const Contact = () => {
                     <Mail size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Email</h3>
+                    <h3 className="font-semibold text-lg">דוא״ל</h3>
                     <p className="text-construction-gray">info@constructpro.com</p>
                     <p className="text-construction-gray">quotes@constructpro.com</p>
                   </div>
