@@ -1,4 +1,3 @@
-
 import { Navigate, Outlet } from "react-router-dom";
 import { useState } from "react";
 import {
@@ -38,15 +37,15 @@ const AdminLayout = () => {
   // If not authenticated, show login screen
   if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100" dir="rtl">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
           <h1 className="mb-6 text-2xl font-bold text-center text-construction-navy">
-            ConstructPro Admin
+            ניהול קונסטרקטפרו
           </h1>
           <form onSubmit={handleLogin}>
             <div className="mb-6">
               <label htmlFor="password" className="block mb-2 text-sm font-medium">
-                Admin Password
+                סיסמת מנהל
               </label>
               <input
                 type="password"
@@ -54,7 +53,7 @@ const AdminLayout = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full p-3 border border-gray-300 rounded-md"
-                placeholder="Enter password"
+                placeholder="הכנס סיסמה"
                 required
               />
               {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
@@ -63,12 +62,12 @@ const AdminLayout = () => {
               type="submit"
               className="w-full p-3 text-white bg-construction-navy rounded-md hover:bg-construction-navy/90"
             >
-              Login
+              התחבר
             </button>
           </form>
           <div className="mt-4 text-center">
             <a href="/" className="text-sm text-construction-navy hover:underline">
-              Return to Website
+              חזרה לאתר
             </a>
           </div>
         </div>
@@ -79,21 +78,21 @@ const AdminLayout = () => {
   // Show admin interface if authenticated
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full" dir="rtl">
         <Sidebar>
           <SidebarHeader className="flex items-center p-4">
-            <div className="text-xl font-bold">ConstructPro Admin</div>
+            <div className="text-xl font-bold">ניהול קונסטרקטפרו</div>
           </SidebarHeader>
           <SidebarContent>
             <SidebarGroup>
-              <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
+              <SidebarGroupLabel>דשבורד</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip="Dashboard">
+                    <SidebarMenuButton asChild tooltip="דשבורד">
                       <a href="/admin">
                         <Home />
-                        <span>Dashboard</span>
+                        <span>דשבורד</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -102,30 +101,30 @@ const AdminLayout = () => {
             </SidebarGroup>
             
             <SidebarGroup>
-              <SidebarGroupLabel>Content</SidebarGroupLabel>
+              <SidebarGroupLabel>תוכן</SidebarGroupLabel>
               <SidebarGroupContent>
                 <SidebarMenu>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip="Projects">
+                    <SidebarMenuButton asChild tooltip="פרויקטים">
                       <a href="/admin/projects">
                         <Building2 />
-                        <span>Projects</span>
+                        <span>פרויקטים</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip="Services">
+                    <SidebarMenuButton asChild tooltip="שירותים">
                       <a href="/admin/services">
                         <ListCheck />
-                        <span>Services</span>
+                        <span>שירותים</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                   <SidebarMenuItem>
-                    <SidebarMenuButton asChild tooltip="Testimonials">
+                    <SidebarMenuButton asChild tooltip="המלצות">
                       <a href="/admin/testimonials">
                         <Users />
-                        <span>Testimonials</span>
+                        <span>המלצות</span>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -139,20 +138,20 @@ const AdminLayout = () => {
           <header className="flex items-center justify-between p-4 border-b bg-white">
             <div className="flex items-center">
               <SidebarTrigger />
-              <h1 className="ml-4 text-xl font-semibold">Admin Panel</h1>
+              <h1 className="ml-4 text-xl font-semibold">פאנל ניהול</h1>
             </div>
             <div>
               <a 
                 href="/"
                 className="px-4 py-2 text-sm text-gray-600 hover:text-construction-navy"
               >
-                View Website
+                צפייה באתר
               </a>
               <button
                 onClick={() => setIsAuthenticated(false)}
                 className="px-4 py-2 ml-2 text-sm text-white bg-construction-navy rounded-md hover:bg-construction-navy/90"
               >
-                Logout
+                התנתק
               </button>
             </div>
           </header>

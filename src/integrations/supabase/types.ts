@@ -9,7 +9,153 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      project_images: {
+        Row: {
+          id: string
+          image_url: string
+          project_id: string | null
+          uploaded_at: string | null
+          uploaded_by: string | null
+        }
+        Insert: {
+          id?: string
+          image_url: string
+          project_id?: string | null
+          uploaded_at?: string | null
+          uploaded_by?: string | null
+        }
+        Update: {
+          id?: string
+          image_url?: string
+          project_id?: string | null
+          uploaded_at?: string | null
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_images_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          client: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          location: string | null
+          title: string
+          year: number | null
+        }
+        Insert: {
+          client?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          title: string
+          year?: number | null
+        }
+        Update: {
+          client?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          location?: string | null
+          title?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
+      report_images: {
+        Row: {
+          id: string
+          image_url: string
+          report_id: string | null
+          uploaded_at: string | null
+        }
+        Insert: {
+          id?: string
+          image_url: string
+          report_id?: string | null
+          uploaded_at?: string | null
+        }
+        Update: {
+          id?: string
+          image_url?: string
+          report_id?: string | null
+          uploaded_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "report_images_report_id_fkey"
+            columns: ["report_id"]
+            isOneToOne: false
+            referencedRelation: "reports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reports: {
+        Row: {
+          content: string | null
+          created_at: string | null
+          foreman_id: string | null
+          id: string
+          project_id: string | null
+        }
+        Insert: {
+          content?: string | null
+          created_at?: string | null
+          foreman_id?: string | null
+          id?: string
+          project_id?: string | null
+        }
+        Update: {
+          content?: string | null
+          created_at?: string | null
+          foreman_id?: string | null
+          id?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          email: string
+          id: string
+          role: Database["public"]["Enums"]["user_role_type"]
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email: string
+          id?: string
+          role: Database["public"]["Enums"]["user_role_type"]
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string
+          id?: string
+          role?: Database["public"]["Enums"]["user_role_type"]
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -18,7 +164,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      user_role_type: "manager" | "foreman" | "worker"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +279,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role_type: ["manager", "foreman", "worker"],
+    },
   },
 } as const
