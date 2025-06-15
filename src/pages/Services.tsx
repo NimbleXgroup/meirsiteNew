@@ -1,19 +1,11 @@
-
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import CTASection from "@/components/home/CTASection";
-import { Check, Loader2 } from "lucide-react";
+import { Check } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Skeleton } from "@/components/ui/skeleton";
-
-type Service = {
-  id: string;
-  title: string;
-  description: string | null;
-  image: string | null;
-  features: string[] | null;
-};
+import { Service } from "@/types";
 
 const Services = () => {
   const { data: services, isLoading, error } = useQuery<Service[]>({
