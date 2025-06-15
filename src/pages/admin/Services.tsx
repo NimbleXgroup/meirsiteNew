@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,30 +27,30 @@ import { Card, CardContent } from "@/components/ui/card";
 const initialServices = [
   {
     id: "residential",
-    title: "Residential Construction",
-    description: "Building exceptional homes that bring your dreams to life with quality craftsmanship and attention to detail.",
+    title: "בנייה למגורים",
+    description: "בניית בתים באיכות גבוהה שמגשימים לכם חלום, עם גימור קפדני ותשומת לב לכל פרט.",
     image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
     features: [
-      "Custom home design and building",
-      "Room additions and expansions",
-      "Luxury home construction",
-      "Multi-family housing development",
-      "Green building techniques",
-      "Energy efficient home solutions"
+      "תכנון ובניית בתים בהתאמה אישית",
+      "הרחבות ושיפוצים",
+      "בנייה יוקרתית",
+      "פיתוח בנייני דירות",
+      "טכניקות בנייה ירוקות",
+      "פתרונות מגורים חסכוניים באנרגיה"
     ]
   },
   {
     id: "commercial",
-    title: "Commercial Building",
-    description: "Creating functional, attractive commercial spaces designed to enhance your business operations and make a strong impression.",
+    title: "בניינים מסחריים",
+    description: "יצירת מרחבים מסחריים מעוצבים ופונקציונליים שמקדמים את העסק שלך.",
     image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
     features: [
-      "Office building construction",
-      "Retail space development",
-      "Industrial facility construction",
-      "Restaurant and hospitality buildings",
-      "Healthcare facility construction",
-      "Educational institution building"
+      "בנייה למשרדים וחנויות",
+      "פיתוח שטחי מסחר",
+      "הקמת מפעלים",
+      "מסעדות ומבני אירוח",
+      "מרפאות",
+      "מבני חינוך"
     ]
   },
 ];
@@ -150,35 +149,35 @@ const AdminServices = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-construction-navy">Manage Services</h1>
+        <h1 className="text-3xl font-bold text-construction-navy">ניהול שירותים</h1>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-construction-navy">
-              <Plus className="w-4 h-4 mr-2" /> Add Service
+              <Plus className="w-4 h-4 mr-2" /> הוסף שירות
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Add New Service</DialogTitle>
+              <DialogTitle>הוסף שירות חדש</DialogTitle>
               <DialogDescription>
-                Add a new service offering to showcase on your website.
+                הוסף שירות להצגה באתר.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="title" className="text-sm font-medium">Title</label>
+                  <label htmlFor="title" className="text-sm font-medium">כותרת</label>
                   <Input 
                     id="title" 
                     value={newService.title}
                     onChange={(e) => setNewService({...newService, title: e.target.value})}
-                    placeholder="Service title"
+                    placeholder="כותרת שירות"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="id" className="text-sm font-medium">ID (optional)</label>
+                  <label htmlFor="id" className="text-sm font-medium">מזהה (אופציונלי)</label>
                   <Input 
                     id="id" 
                     value={newService.id}
@@ -189,7 +188,7 @@ const AdminServices = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="image" className="text-sm font-medium">Image URL</label>
+                <label htmlFor="image" className="text-sm font-medium">כתובת URL לתמונה</label>
                 <Input 
                   id="image" 
                   value={newService.image}
@@ -199,25 +198,25 @@ const AdminServices = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="description" className="text-sm font-medium">Description</label>
+                <label htmlFor="description" className="text-sm font-medium">תיאור</label>
                 <Textarea 
                   id="description" 
                   value={newService.description}
                   onChange={(e) => setNewService({...newService, description: e.target.value})}
-                  placeholder="Service description"
+                  placeholder="תיאור שירות"
                   rows={3}
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Features (up to 6)</label>
+                <label className="text-sm font-medium">מאפיינים (עד 6)</label>
                 <div className="grid grid-cols-1 gap-2">
                   {Array(6).fill(0).map((_, index) => (
                     <Input
                       key={index}
                       value={newService.features?.[index] || ""}
                       onChange={(e) => updateFeature(index, e.target.value, true)}
-                      placeholder={`Feature ${index + 1}`}
+                      placeholder={`מאפיין ${index + 1}`}
                     />
                   ))}
                 </div>
@@ -225,14 +224,14 @@ const AdminServices = () => {
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                Cancel
+                ביטול
               </Button>
               <Button 
                 className="bg-construction-navy"
                 onClick={handleAddService}
                 disabled={!newService.title || !newService.description}
               >
-                Add Service
+                הוסף שירות
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -259,7 +258,7 @@ const AdminServices = () => {
                     setIsEditDialogOpen(true);
                   }}
                 >
-                  <Pen className="h-4 w-4 mr-2" /> Edit
+                  <Pen className="h-4 w-4 mr-2" /> ערוך
                 </Button>
                 <Button
                   size="sm"
@@ -270,7 +269,7 @@ const AdminServices = () => {
                     setIsDeleteDialogOpen(true);
                   }}
                 >
-                  <Trash2 className="h-4 w-4 mr-2" /> Delete
+                  <Trash2 className="h-4 w-4 mr-2" /> מחק
                 </Button>
               </div>
             </CardContent>
@@ -279,7 +278,7 @@ const AdminServices = () => {
         
         {services.length === 0 && (
           <div className="col-span-2 text-center py-10 bg-gray-50 rounded-lg">
-            <p className="text-gray-500">No services found. Add a new service to get started.</p>
+            <p className="text-gray-500">לא נמצאו שירותים. הוסף שירות חדש כדי להתחיל.</p>
           </div>
         )}
       </div>
@@ -288,16 +287,16 @@ const AdminServices = () => {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Edit Service</DialogTitle>
+            <DialogTitle>ערוך שירות</DialogTitle>
             <DialogDescription>
-              Update your service details.
+              עדכן את פרטי השירות.
             </DialogDescription>
           </DialogHeader>
           {editingService && (
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="edit-title" className="text-sm font-medium">Title</label>
+                  <label htmlFor="edit-title" className="text-sm font-medium">כותרת</label>
                   <Input 
                     id="edit-title" 
                     value={editingService.title}
@@ -305,7 +304,7 @@ const AdminServices = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="edit-id" className="text-sm font-medium">ID</label>
+                  <label htmlFor="edit-id" className="text-sm font-medium">מזהה</label>
                   <Input 
                     id="edit-id" 
                     value={editingService.id}
@@ -315,7 +314,7 @@ const AdminServices = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-image" className="text-sm font-medium">Image URL</label>
+                <label htmlFor="edit-image" className="text-sm font-medium">כתובת URL לתמונה</label>
                 <Input 
                   id="edit-image" 
                   value={editingService.image}
@@ -324,7 +323,7 @@ const AdminServices = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-description" className="text-sm font-medium">Description</label>
+                <label htmlFor="edit-description" className="text-sm font-medium">תיאור</label>
                 <Textarea 
                   id="edit-description" 
                   value={editingService.description}
@@ -334,14 +333,14 @@ const AdminServices = () => {
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm font-medium">Features</label>
+                <label className="text-sm font-medium">מאפיינים</label>
                 <div className="grid grid-cols-1 gap-2">
                   {editingService.features.map((feature, index) => (
                     <Input
                       key={index}
                       value={feature}
                       onChange={(e) => updateFeature(index, e.target.value)}
-                      placeholder={`Feature ${index + 1}`}
+                      placeholder={`מאפיין ${index + 1}`}
                     />
                   ))}
                 </div>
@@ -350,13 +349,13 @@ const AdminServices = () => {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               className="bg-construction-navy"
               onClick={handleUpdateService}
             >
-              Save Changes
+              שמור שינויים
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -366,20 +365,20 @@ const AdminServices = () => {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Service</DialogTitle>
+            <DialogTitle>מחק שירות</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this service? This action cannot be undone.
+              האם למחוק את השירות הזה? לא ניתן לשחזר פעולה זו.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               variant="destructive"
               onClick={handleDeleteService}
             >
-              Delete
+              מחק
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -387,5 +386,4 @@ const AdminServices = () => {
     </div>
   );
 };
-
 export default AdminServices;

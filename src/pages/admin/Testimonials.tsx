@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -30,21 +29,21 @@ import { useToast } from "@/components/ui/use-toast";
 const initialTestimonials = [
   {
     id: 1,
-    name: "John Smith",
-    company: "Smith Family Homes",
-    role: "Homeowner",
-    comment: "ConstructPro transformed our vision into reality. Their attention to detail and commitment to quality craftsmanship exceeded our expectations. We couldn't be happier with our new home.",
+    name: "יונתן לוי",
+    company: "בני לוי ובניו",
+    role: "לקוח פרטי",
+    comment: "קונסטרקטפרו הגשימו לנו את החלום לבית חדש – שירות ברמה גבוהה, עמידה בלוחות זמנים ואיכות ללא פשרות.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+    image: "https://randomuser.me/api/portraits/men/32.jpg"
   },
   {
     id: 2,
-    name: "Sarah Johnson",
-    company: "Johnson Retail Group",
-    role: "CEO",
-    comment: "We hired ConstructPro for our retail space renovation and were impressed with their professionalism and efficiency. They completed the project on time and within budget, allowing us to open our doors without delay.",
+    name: "שרה כהן",
+    company: "אס.אי ייעוץ",
+    role: "מנהלת פרויקטים",
+    comment: "צוות מקצועי ואמין – בזכותם זכינו לשיפוץ מדויק ומוקפד. ממליצה בחום!",
     rating: 4,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+    image: "https://randomuser.me/api/portraits/women/44.jpg"
   }
 ];
 
@@ -129,76 +128,76 @@ const AdminTestimonials = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-construction-navy">Manage Testimonials</h1>
+        <h1 className="text-3xl font-bold text-construction-navy">ניהול המלצות לקוחות</h1>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-construction-navy">
-              <Plus className="w-4 h-4 mr-2" /> Add Testimonial
+              <Plus className="w-4 h-4 mr-2" /> הוסף המלצה
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Add New Testimonial</DialogTitle>
+              <DialogTitle>הוסף המלצה חדשה</DialogTitle>
               <DialogDescription>
-                Add a new client testimonial to showcase on your website.
+                הוסף המלצה חדשה של לקוח לשימוש באתר.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">Client Name</label>
+                  <label htmlFor="name" className="text-sm font-medium">שם הלקוח</label>
                   <Input 
                     id="name" 
                     value={newTestimonial.name}
                     onChange={(e) => setNewTestimonial({...newTestimonial, name: e.target.value})}
-                    placeholder="Full name"
+                    placeholder="שם מלא"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="company" className="text-sm font-medium">Company (optional)</label>
+                  <label htmlFor="company" className="text-sm font-medium">חברה (אופציונלי)</label>
                   <Input 
                     id="company" 
                     value={newTestimonial.company}
                     onChange={(e) => setNewTestimonial({...newTestimonial, company: e.target.value})}
-                    placeholder="Company name"
+                    placeholder="שם החברה"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="role" className="text-sm font-medium">Role/Position</label>
+                  <label htmlFor="role" className="text-sm font-medium">תפקיד</label>
                   <Input 
                     id="role" 
                     value={newTestimonial.role}
                     onChange={(e) => setNewTestimonial({...newTestimonial, role: e.target.value})}
-                    placeholder="E.g., Homeowner, CEO"
+                    placeholder="תפקיד לדוגמה: לקוח, מנכ״ל"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="rating" className="text-sm font-medium">Rating</label>
+                  <label htmlFor="rating" className="text-sm font-medium">דירוג</label>
                   <Select 
                     value={String(newTestimonial.rating)}
                     onValueChange={(value) => setNewTestimonial({...newTestimonial, rating: parseInt(value)})}
                   >
                     <SelectTrigger id="rating">
-                      <SelectValue placeholder="Select rating" />
+                      <SelectValue placeholder="בחר דירוג" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="5">5 Stars</SelectItem>
-                      <SelectItem value="4">4 Stars</SelectItem>
-                      <SelectItem value="3">3 Stars</SelectItem>
-                      <SelectItem value="2">2 Stars</SelectItem>
-                      <SelectItem value="1">1 Star</SelectItem>
+                      <SelectItem value="5">5 כוכבים</SelectItem>
+                      <SelectItem value="4">4 כוכבים</SelectItem>
+                      <SelectItem value="3">3 כוכבים</SelectItem>
+                      <SelectItem value="2">2 כוכבים</SelectItem>
+                      <SelectItem value="1">כוכב 1</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="image" className="text-sm font-medium">Profile Image URL (optional)</label>
+                <label htmlFor="image" className="text-sm font-medium">תמונת פרופיל (אופציונלי)</label>
                 <Input 
                   id="image" 
                   value={newTestimonial.image}
@@ -208,26 +207,26 @@ const AdminTestimonials = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="comment" className="text-sm font-medium">Testimonial</label>
+                <label htmlFor="comment" className="text-sm font-medium">חוות דעת</label>
                 <Textarea 
                   id="comment" 
                   value={newTestimonial.comment}
                   onChange={(e) => setNewTestimonial({...newTestimonial, comment: e.target.value})}
-                  placeholder="What the client said about your services..."
+                  placeholder="מה הלקוח אמר על השירותים שלך..."
                   rows={4}
                 />
               </div>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                Cancel
+                ביטול
               </Button>
               <Button 
                 className="bg-construction-navy"
                 onClick={handleAddTestimonial}
                 disabled={!newTestimonial.name || !newTestimonial.comment}
               >
-                Add Testimonial
+                הוסף המלצה
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -253,7 +252,7 @@ const AdminTestimonials = () => {
                   <h3 className="font-bold">{testimonial.name}</h3>
                   <p className="text-sm text-gray-600">
                     {testimonial.role}
-                    {testimonial.company && ` at ${testimonial.company}`}
+                    {testimonial.company && ` ב${testimonial.company}`}
                   </p>
                 </div>
               </div>
@@ -273,7 +272,7 @@ const AdminTestimonials = () => {
                     setIsEditDialogOpen(true);
                   }}
                 >
-                  <Pen className="h-4 w-4 mr-2" /> Edit
+                  <Pen className="h-4 w-4 mr-2" /> ערוך
                 </Button>
                 <Button
                   size="sm"
@@ -284,7 +283,7 @@ const AdminTestimonials = () => {
                     setIsDeleteDialogOpen(true);
                   }}
                 >
-                  <Trash2 className="h-4 w-4 mr-2" /> Delete
+                  <Trash2 className="h-4 w-4 mr-2" /> מחק
                 </Button>
               </div>
             </CardContent>
@@ -293,7 +292,7 @@ const AdminTestimonials = () => {
         
         {testimonials.length === 0 && (
           <div className="col-span-2 text-center py-10 bg-gray-50 rounded-lg">
-            <p className="text-gray-500">No testimonials found. Add a new testimonial to get started.</p>
+            <p className="text-gray-500">לא נמצאו המלצות. הוסף המלצה כדי להתחיל.</p>
           </div>
         )}
       </div>
@@ -302,16 +301,16 @@ const AdminTestimonials = () => {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Edit Testimonial</DialogTitle>
+            <DialogTitle>ערוך המלצה</DialogTitle>
             <DialogDescription>
-              Update client testimonial details.
+              עדכן את פרטי ההמלצה.
             </DialogDescription>
           </DialogHeader>
           {editingTestimonial && (
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="edit-name" className="text-sm font-medium">Client Name</label>
+                  <label htmlFor="edit-name" className="text-sm font-medium">שם הלקוח</label>
                   <Input 
                     id="edit-name" 
                     value={editingTestimonial.name}
@@ -319,7 +318,7 @@ const AdminTestimonials = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="edit-company" className="text-sm font-medium">Company</label>
+                  <label htmlFor="edit-company" className="text-sm font-medium">חברה</label>
                   <Input 
                     id="edit-company" 
                     value={editingTestimonial.company}
@@ -330,7 +329,7 @@ const AdminTestimonials = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="edit-role" className="text-sm font-medium">Role/Position</label>
+                  <label htmlFor="edit-role" className="text-sm font-medium">תפקיד</label>
                   <Input 
                     id="edit-role" 
                     value={editingTestimonial.role}
@@ -338,7 +337,7 @@ const AdminTestimonials = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="edit-rating" className="text-sm font-medium">Rating</label>
+                  <label htmlFor="edit-rating" className="text-sm font-medium">דירוג</label>
                   <Select 
                     value={String(editingTestimonial.rating)}
                     onValueChange={(value) => setEditingTestimonial({...editingTestimonial, rating: parseInt(value)})}
@@ -347,18 +346,18 @@ const AdminTestimonials = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="5">5 Stars</SelectItem>
-                      <SelectItem value="4">4 Stars</SelectItem>
-                      <SelectItem value="3">3 Stars</SelectItem>
-                      <SelectItem value="2">2 Stars</SelectItem>
-                      <SelectItem value="1">1 Star</SelectItem>
+                      <SelectItem value="5">5 כוכבים</SelectItem>
+                      <SelectItem value="4">4 כוכבים</SelectItem>
+                      <SelectItem value="3">3 כוכבים</SelectItem>
+                      <SelectItem value="2">2 כוכבים</SelectItem>
+                      <SelectItem value="1">כוכב 1</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-image" className="text-sm font-medium">Profile Image URL</label>
+                <label htmlFor="edit-image" className="text-sm font-medium">תמונת פרופיל</label>
                 <Input 
                   id="edit-image" 
                   value={editingTestimonial.image}
@@ -367,7 +366,7 @@ const AdminTestimonials = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-comment" className="text-sm font-medium">Testimonial</label>
+                <label htmlFor="edit-comment" className="text-sm font-medium">חוות דעת</label>
                 <Textarea 
                   id="edit-comment" 
                   value={editingTestimonial.comment}
@@ -379,13 +378,13 @@ const AdminTestimonials = () => {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               className="bg-construction-navy"
               onClick={handleUpdateTestimonial}
             >
-              Save Changes
+              שמור שינויים
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -395,20 +394,20 @@ const AdminTestimonials = () => {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Testimonial</DialogTitle>
+            <DialogTitle>מחק המלצה</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this testimonial? This action cannot be undone.
+              האם ברצונך למחוק את ההמלצה? פעולה זו אינה ניתנת לביטול.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               variant="destructive"
               onClick={handleDeleteTestimonial}
             >
-              Delete
+              מחק
             </Button>
           </DialogFooter>
         </DialogContent>

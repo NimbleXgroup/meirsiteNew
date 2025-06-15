@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -33,23 +32,23 @@ import { useToast } from "@/components/ui/use-toast";
 const initialProjects = [
   {
     id: 1,
-    title: "Modern Office Building",
-    category: "Commercial",
+    title: "בניין משרדים מודרני",
+    category: "מסחרי",
     image: "https://images.unsplash.com/photo-1460574283810-2aab119d8511",
-    description: "A 10-story modern office building with sustainable design elements and state-of-the-art facilities.",
-    location: "Downtown Business District",
+    description: "בניין משרדים בן 10 קומות עם עיצוב בר-קיימא ומתקנים מתקדמים.",
+    location: "מרכז העסקים",
     year: 2023,
-    client: "Tech Innovations Inc."
+    client: "טק אינוביישנס"
   },
   {
     id: 2,
-    title: "Luxury Residential Complex",
-    category: "Residential",
+    title: "קומפלקס מגורים יוקרתי",
+    category: "מגורים",
     image: "https://images.unsplash.com/photo-1518005020951-eccb494ad742",
-    description: "Premium residential complex featuring 45 luxury apartments with high-end finishes and amenities.",
-    location: "Riverside Heights",
+    description: "מתחם מגורים יוקרתי הכולל 45 דירות עם רמת גימור גבוהה ואבזור מתקדם.",
+    location: "ריברסייד",
     year: 2022,
-    client: "Riverside Developments LLC"
+    client: "ריברסייד נדל\"ן"
   },
 ];
 
@@ -126,83 +125,84 @@ const AdminProjects = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-construction-navy">Manage Projects</h1>
+        <h1 className="text-3xl font-bold text-construction-navy">ניהול פרויקטים</h1>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
             <Button className="bg-construction-navy">
-              <Plus className="w-4 h-4 mr-2" /> Add Project
+              <Plus className="w-4 h-4 mr-2" /> הוסף פרויקט
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Add New Project</DialogTitle>
+              <DialogTitle>הוסף פרויקט חדש</DialogTitle>
               <DialogDescription>
-                Add details for a new construction project to showcase on your website.
+                הוסף פרטים עבור פרויקט בנייה חדש להצגה באתר.
               </DialogDescription>
             </DialogHeader>
+            {/* טופס הוספה */}
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="title" className="text-sm font-medium">Title</label>
+                  <label htmlFor="title" className="text-sm font-medium">שם הפרויקט</label>
                   <Input 
                     id="title" 
                     value={newProject.title}
                     onChange={(e) => setNewProject({...newProject, title: e.target.value})}
-                    placeholder="Project title"
+                    placeholder="שם הפרויקט"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="category" className="text-sm font-medium">Category</label>
+                  <label htmlFor="category" className="text-sm font-medium">קטגוריה</label>
                   <Select 
                     value={newProject.category}
                     onValueChange={(value) => setNewProject({...newProject, category: value})}
                   >
                     <SelectTrigger id="category">
-                      <SelectValue placeholder="Select category" />
+                      <SelectValue placeholder="בחר קטגוריה" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Commercial">Commercial</SelectItem>
-                      <SelectItem value="Residential">Residential</SelectItem>
-                      <SelectItem value="Renovation">Renovation</SelectItem>
+                      <SelectItem value="מסחרי">מסחרי</SelectItem>
+                      <SelectItem value="מגורים">מגורים</SelectItem>
+                      <SelectItem value="שיפוץ">שיפוץ</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="image" className="text-sm font-medium">Image URL</label>
+                <label htmlFor="image" className="text-sm font-medium">תמונה</label>
                 <Input 
                   id="image" 
                   value={newProject.image}
                   onChange={(e) => setNewProject({...newProject, image: e.target.value})}
-                  placeholder="https://example.com/image.jpg"
+                  placeholder="קישור לתמונה"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="description" className="text-sm font-medium">Description</label>
+                <label htmlFor="description" className="text-sm font-medium">תיאור</label>
                 <Input 
                   id="description" 
                   value={newProject.description}
                   onChange={(e) => setNewProject({...newProject, description: e.target.value})}
-                  placeholder="Project description"
+                  placeholder="תיאור הפרויקט"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="location" className="text-sm font-medium">Location</label>
+                  <label htmlFor="location" className="text-sm font-medium">מיקום</label>
                   <Input 
                     id="location" 
                     value={newProject.location}
                     onChange={(e) => setNewProject({...newProject, location: e.target.value})}
-                    placeholder="Project location"
+                    placeholder="מיקום הפרויקט"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="year" className="text-sm font-medium">Year</label>
+                  <label htmlFor="year" className="text-sm font-medium">שנה</label>
                   <Input 
                     id="year"
                     type="number"
@@ -213,25 +213,25 @@ const AdminProjects = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="client" className="text-sm font-medium">Client</label>
+                <label htmlFor="client" className="text-sm font-medium">לקוח</label>
                 <Input 
                   id="client" 
                   value={newProject.client}
                   onChange={(e) => setNewProject({...newProject, client: e.target.value})}
-                  placeholder="Client name"
+                  placeholder="שם הלקוח"
                 />
               </div>
             </div>
             <DialogFooter>
               <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
-                Cancel
+                ביטול
               </Button>
               <Button 
                 className="bg-construction-navy"
                 onClick={handleAddProject}
                 disabled={!newProject.title || !newProject.image || !newProject.description}
               >
-                Add Project
+                הוסף פרויקט
               </Button>
             </DialogFooter>
           </DialogContent>
@@ -243,11 +243,11 @@ const AdminProjects = () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[250px]">Title</TableHead>
-              <TableHead>Category</TableHead>
-              <TableHead>Location</TableHead>
-              <TableHead>Year</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
+              <TableHead className="w-[250px]">שם הפרויקט</TableHead>
+              <TableHead>קטגוריה</TableHead>
+              <TableHead>מיקום</TableHead>
+              <TableHead>שנה</TableHead>
+              <TableHead className="text-right">פעולות</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -285,7 +285,7 @@ const AdminProjects = () => {
             {projects.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5} className="text-center py-8 text-gray-500">
-                  No projects found. Add a new project to get started.
+                  לא נמצאו פרויקטים. הוסף פרויקט חדש כדי להתחיל.
                 </TableCell>
               </TableRow>
             )}
@@ -297,16 +297,16 @@ const AdminProjects = () => {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Edit Project</DialogTitle>
+            <DialogTitle>ערוך פרויקט</DialogTitle>
             <DialogDescription>
-              Update the details of your construction project.
+              עדכן את פרטי הפרויקט שלך.
             </DialogDescription>
           </DialogHeader>
           {editingProject && (
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="edit-title" className="text-sm font-medium">Title</label>
+                  <label htmlFor="edit-title" className="text-sm font-medium">שם הפרויקט</label>
                   <Input 
                     id="edit-title" 
                     value={editingProject.title}
@@ -314,7 +314,7 @@ const AdminProjects = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="edit-category" className="text-sm font-medium">Category</label>
+                  <label htmlFor="edit-category" className="text-sm font-medium">קטגוריה</label>
                   <Select 
                     value={editingProject.category}
                     onValueChange={(value) => setEditingProject({...editingProject, category: value})}
@@ -323,16 +323,16 @@ const AdminProjects = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="Commercial">Commercial</SelectItem>
-                      <SelectItem value="Residential">Residential</SelectItem>
-                      <SelectItem value="Renovation">Renovation</SelectItem>
+                      <SelectItem value="מסחרי">מסחרי</SelectItem>
+                      <SelectItem value="מגורים">מגורים</SelectItem>
+                      <SelectItem value="שיפוץ">שיפוץ</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-image" className="text-sm font-medium">Image URL</label>
+                <label htmlFor="edit-image" className="text-sm font-medium">תמונה</label>
                 <Input 
                   id="edit-image" 
                   value={editingProject.image}
@@ -341,7 +341,7 @@ const AdminProjects = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-description" className="text-sm font-medium">Description</label>
+                <label htmlFor="edit-description" className="text-sm font-medium">תיאור</label>
                 <Input 
                   id="edit-description" 
                   value={editingProject.description}
@@ -351,7 +351,7 @@ const AdminProjects = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label htmlFor="edit-location" className="text-sm font-medium">Location</label>
+                  <label htmlFor="edit-location" className="text-sm font-medium">מיקום</label>
                   <Input 
                     id="edit-location" 
                     value={editingProject.location}
@@ -359,7 +359,7 @@ const AdminProjects = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="edit-year" className="text-sm font-medium">Year</label>
+                  <label htmlFor="edit-year" className="text-sm font-medium">שנה</label>
                   <Input 
                     id="edit-year"
                     type="number"
@@ -370,7 +370,7 @@ const AdminProjects = () => {
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="edit-client" className="text-sm font-medium">Client</label>
+                <label htmlFor="edit-client" className="text-sm font-medium">לקוח</label>
                 <Input 
                   id="edit-client" 
                   value={editingProject.client}
@@ -381,13 +381,13 @@ const AdminProjects = () => {
           )}
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               className="bg-construction-navy"
               onClick={handleUpdateProject}
             >
-              Save Changes
+              שמור שינויים
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -397,20 +397,20 @@ const AdminProjects = () => {
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Project</DialogTitle>
+            <DialogTitle>מחק פרויקט</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this project? This action cannot be undone.
+              האם אתה בטוח שברצונך למחוק את הפרויקט הזה? פעולה זו אינה ניתנת לביטול.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
-              Cancel
+              ביטול
             </Button>
             <Button 
               variant="destructive"
               onClick={handleDeleteProject}
             >
-              Delete
+              מחק
             </Button>
           </DialogFooter>
         </DialogContent>
